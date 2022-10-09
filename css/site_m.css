@@ -253,7 +253,7 @@
     right: 1%;
     margin: auto;
 
-    display: none;
+    /* display: none; */
   }
   .pager a {
     width: 8px;

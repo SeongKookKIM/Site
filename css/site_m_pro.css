@@ -242,7 +242,7 @@
     position: fixed;
     top: 40%;
     right: 1%;
-    display: none;
+    /* display: none; */
   }
   .pager a {
     width: 10px;
