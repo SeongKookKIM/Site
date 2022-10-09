@@ -1,4 +1,4 @@
-@media screen and (min-width: 450px) and (max-width: 759px) {
+@media screen and (min-width: 430px) and (max-width: 759px) {
   * {
     margin: 0;
     padding: 0;
@@ -193,7 +193,7 @@
     top: 0;
     left: 0;
 
-    opacity: 0;
+    display: none;
   }
   #menu_bg #pc_menu {
     width: 100%;
