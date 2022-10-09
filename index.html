@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>samsite</title>
+    <link rel="stylesheet" href="css/site_p.css" />
+    <link rel="stylesheet" href="css/site_t.css" />
+    <link rel="stylesheet" href="css/site_m_pro.css" />
+    <link rel="stylesheet" href="css/site_m.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap");
+
+      a,
+      p {
+        font-family: "Roboto Condensed", sans-serif;
+      }
+    </style>
+    <script src="lib/jquery-3.1.1.min.js"></script>
+    <script src="lib/jquery.easing.1.3.js"></script>
+    <script src="lib/jquery.mousewheel.js"></script>
+    <script>
+      $(function () {
+        // 메뉴토글이벤트
+        $(".btn").click(function () {
+          //
+          $(this).next().slideToggle("slow");
+
+          $(".list").not($(this).next()).slideUp("slow");
+        });
+
+        // 스크롤이벤트
+        $(window).on("mousewheel, disableScroll", function () {
+          e.preventDefault;
+        });
+
+        $("section").each(function () {
+          $(this).mousewheel(function (e, delta) {
+            var moveTop;
+            var indexNum;
+
+            if (delta > 0) {
+              moveTop = $(this).prev().offset().top;
+              indexNum = $(this).prev().index();
+            } else {
+              moveTop = $(this).next().offset().top;
+              indexNum = $(this).next().index();
+            }
+
+            $("html, body").stop().animate(
+              {
+                scrollTop: moveTop,
+              },
+              1000,
+              "easeOutExpo"
+            );
+
+            $("section").eq(indexNum).children("nav ul li").addClass("on");
+
+            $(".txtbox")
+              .not($("section").eq(indexNum).children(".txtbox"))
+              .removeClass("on");
+
+            $(".pager a").eq(indexNum).addClass("active");
+            $(".pager a").not($(".pager a").eq(indexNum)).removeClass("active");
+          });
+        });
+
+        // 스크롤식 색상변경
+        $(window).scroll(function () {
+          var scr_top = $(this).scrollTop();
+
+          if (scr_top > $("#main2").offset().top - 30) {
+            $("a, p").css({ color: "white" });
+          } else {
+            $("a, p").css({ color: "black" });
+          }
+          if (scr_top > $("#main3").offset().top - 30) {
+            $("a, p").css({ color: "black" });
+          }
+        });
+
+        // 메뉴토글바 이벤트
+        var on_off = false;
+
+        $(".toggle").click(function () {
+          on_off = !on_off;
+
+          if (on_off) {
+            $("#menu_bg").fadeTo("slow", 1);
+
+            //
+
+            $(".t_stick, .b_stick")
+              .animate({ top: "15px" }, 500, "easeOutExpo")
+              .animate({ rotate: "45deg" }, 500, "easeOutExpo");
+            //
+            $(".m_stick")
+              .delay(500)
+              .animate({ rotate: "-45deg" }, 500, "easeOutExpo");
+
+            //
+          } else {
+            $("#menu_bg").stop().animate({ opacity: "0" }, 1000, "easeOutExpo");
+
+            //
+            $(".toggle .stick").animate({ rotate: "0deg" }, 500, "easeOutExpo");
+            $(".t_stick").animate({ top: "5px" }, 500, "easeOutExpo");
+            $(".b_stick").animate({ top: "25px" }, 500, "easeOutExpo");
+          }
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <section id="main1" class="main1">
+      <div><img src="img/img06.jpg" alt="이미지1" /></div>
+    </section>
+    <section id="main2" class="main2">
+      <div><img src="img/img01.jpg" alt="이미지3" /></div>
+      <div><img src="img/img04.jpg" alt="이미지4" /></div>
+    </section>
+    <section id="main3" class="main3">
+      <div><img src="img/img03.jpg" alt="이미지5" /></div>
+      <div><img src="img/img05.jpg" alt="이미지6" /></div>
+      <div><img src="img/img07.jpg" alt="이미지7" /></div>
+      <div class="txt">
+        <p>Copyright&copy; 2022 SAM All rights reserved.</p>
+      </div>
+    </section>
+    <!-- 로고 -->
+    <div class="logo"><img src="img/logo_01.png" alt="logo" /></div>
+    <!-- 메뉴토글 -->
+    <div class="toggle">
+      <span class="stick t_stick"></span>
+      <span class="stick m_stick"></span>
+      <span class="stick b_stick"></span>
+    </div>
+    <!-- 메뉴 -->
+    <div id="menu_bg">
+      <nav id="pc_menu">
+        <ul>
+          <li><a href="#">ABOUT</a></li>
+          <li class="btn shop"><p class="shop">SHOP</p></li>
+          <li class="list">
+            <ol>
+              <li><a href="#">submenu1</a></li>
+              <li><a href="#">submenu2</a></li>
+              <li><a href="#">submenu3</a></li>
+              <li><a href="#">submenu4</a></li>
+            </ol>
+          </li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Q&A</a></li>
+          <li><a href="#">REVIEW</a></li>
+          <li><a href="#">MAGAZINE</a></li>
+          <li><a href="#">LOGIN</a></li>
+          <li><a href="#">JOIN</a></li>
+          <li><a href="#">ORDER</a></li>
+        </ul>
+      </nav>
+    </div>
+    <!-- 페이저 -->
+    <div class="pager">
+      <a href="#main1" class="active">1</a>
+      <a href="#main2">2</a>
+      <a href="#main3">3</a>
+    </div>
+  </body>
+</html>
